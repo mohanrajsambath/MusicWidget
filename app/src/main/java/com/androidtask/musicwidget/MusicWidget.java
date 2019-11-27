@@ -12,11 +12,23 @@ import android.widget.RemoteViews;
 import com.androidtask.musicwidget.activities.SongListActivity;
 import com.androidtask.musicwidget.service.MusicService;
 
+/**
+ * The type Music widget.
+ */
 public class MusicWidget extends AppWidgetProvider {
 
 	private static final String TAG = "Music Widget";
+	/**
+	 * The constant ACTION_PLAY_PAUSE.
+	 */
 	public static final String ACTION_PLAY_PAUSE = "com.androidtask.musicwidget.play_pause";
+	/**
+	 * The constant ACTION_STOP.
+	 */
 	public static final String ACTION_STOP = "com.androidtask.musicwidget.stop";
+	/**
+	 * The constant ACTION_JUMP_TO.
+	 */
 	public static final String ACTION_JUMP_TO = "com.androidtask.musicwidget.jump_to";
 	
 
@@ -27,7 +39,13 @@ public class MusicWidget extends AppWidgetProvider {
 		associateIntents(context);
 		Log.d(TAG, "Widget's onUpdate()");
 	}
-	
+
+	/**
+	 * Get remote views remote views.
+	 *
+	 * @param context the context
+	 * @return the remote views
+	 */
 	public static RemoteViews getRemoteViews(Context context){
 		RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
 
@@ -49,6 +67,13 @@ public class MusicWidget extends AppWidgetProvider {
 		return remoteViews;
 	}
 
+	/**
+	 * Gets pending intent.
+	 *
+	 * @param context the context
+	 * @param action  the action
+	 * @return the pending intent
+	 */
 	public static PendingIntent getPendingIntent(Context context, String action) {
 		Intent intent = new Intent(context, MusicWidget.class);
 		intent.setAction(action);

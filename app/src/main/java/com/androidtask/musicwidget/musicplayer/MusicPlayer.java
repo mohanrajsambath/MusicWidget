@@ -10,31 +10,63 @@ import com.androidtask.musicwidget.model.Song;
 
 import java.io.IOException;
 
+/**
+ * The type Music player.
+ */
 public class MusicPlayer implements OnCompletionListener {
 	private MediaPlayer player;
 	private final Context context;
 	private MusicPlayerCompletionListener onMusicCompletionListener;
 	private static final String TAG = "Music Player";
-	
-	
-	public MusicPlayer(Context context){
+
+
+    /**
+     * Instantiates a new Music player.
+     *
+     * @param context the context
+     */
+    public MusicPlayer(Context context){
 		this.context = context;
 	}
-	
-	
-	public boolean isPlaying(){
+
+
+    /**
+     * Is playing boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isPlaying(){
 		return player != null && player.isPlaying();
 	}
-	
-	public boolean isPaused(){
+
+    /**
+     * Is paused boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isPaused(){
 		return player != null && !player.isPlaying();
 	}
-	
-	public boolean isStopped(){
+
+    /**
+     * Is stopped boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isStopped(){
 		return player == null;
 	}
-	
-	public void setSong(Song song) throws IllegalArgumentException, SecurityException, IllegalStateException, IOException{
+
+    /**
+     * Sets song.
+     *
+     * @param song the song
+     * @throws IllegalArgumentException the illegal argument exception
+     * @throws SecurityException        the security exception
+     * @throws IllegalStateException    the illegal state exception
+     * @throws IOException              the io exception
+     */
+    public void setSong(Song song) throws IllegalArgumentException, SecurityException, IllegalStateException, IOException{
 		boolean wasPlaying = isPlaying();
 		
 		if (player == null) {
@@ -53,22 +85,31 @@ public class MusicPlayer implements OnCompletionListener {
 		
 		Log.d(TAG, "Changed song to: " + song.getTitle());
 	}
-	
-	public void play(){
+
+    /**
+     * Play.
+     */
+    public void play(){
 		if (player == null)
 			throw new IllegalStateException("Must call setSong() before calling play()");
 		
 		player.start();
 	}
-	
-	public void pause(){
+
+    /**
+     * Pause.
+     */
+    public void pause(){
 		if(isPlaying()){
 			player.pause();
 			Log.d(TAG, "Music paused");
 		}
 	}
-	
-	public void stop(){
+
+    /**
+     * Stop.
+     */
+    public void stop(){
 		if (player != null) {
 			player.stop();
 			player.release();
@@ -77,11 +118,13 @@ public class MusicPlayer implements OnCompletionListener {
 		Log.d(TAG, "Music Stopped");
 	}
 
-	
-	/**
-	 * Register a callback to be invoked when the end of a song has been reached during playback
-	 */
-	public void setOnCompletionListener(MusicPlayerCompletionListener listener){
+
+    /**
+     * Register a callback to be invoked when the end of a song has been reached during playback
+     *
+     * @param listener the listener
+     */
+    public void setOnCompletionListener(MusicPlayerCompletionListener listener){
 		onMusicCompletionListener = listener;
 	}
 	

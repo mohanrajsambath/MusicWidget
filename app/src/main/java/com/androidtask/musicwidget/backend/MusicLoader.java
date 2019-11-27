@@ -10,6 +10,9 @@ import android.util.Log;
 
 import com.androidtask.musicwidget.model.Song;
 
+/**
+ * The type Music loader.
+ */
 public class MusicLoader {
 	private static final String TAG = "Music Loader";
 	private static final String LAST_SONG_TITLE = "Last Song Title";
@@ -20,6 +23,12 @@ public class MusicLoader {
 	private Cursor cur;
 	private boolean isShuffleOn;
 
+	/**
+	 * Get instance music loader.
+	 *
+	 * @param context the context
+	 * @return the music loader
+	 */
 	public static MusicLoader getInstance(Context context){
 		if (instance == null) {
 			instance = new MusicLoader(context);
@@ -95,7 +104,12 @@ public class MusicLoader {
         Log.d(TAG, "Done querying media. MusicLoader is ready.");
     }
 
-    public Song getCurrent() {
+	/**
+	 * Gets current.
+	 *
+	 * @return the current
+	 */
+	public Song getCurrent() {
     	String title  = cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.TITLE));
     	String artist = cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.ARTIST));
     	long duration = cur.getLong(  cur.getColumnIndex(MediaStore.Audio.Media.DURATION));
@@ -104,24 +118,42 @@ public class MusicLoader {
 		return new Song(id, title, artist, duration);
     }
 
-    public Song getNext() {
+	/**
+	 * Gets next.
+	 *
+	 * @return the next
+	 */
+	public Song getNext() {
     	if (!cur.moveToNext())
     		cur.moveToFirst();
 
     	return getCurrent();
     }
 
-    public Song getPrevious() {
+	/**
+	 * Gets previous.
+	 *
+	 * @return the previous
+	 */
+	public Song getPrevious() {
     	if (!cur.moveToPrevious())
     		cur.moveToLast();
 
     	return getCurrent();
     }
 
+	/**
+	 * Is shuffle on boolean.
+	 *
+	 * @return the boolean
+	 */
 	public boolean isShuffleOn () {
 		return isShuffleOn;
 	}
 
+	/**
+	 * Toggle shuffle.
+	 */
 	public void toggleShuffle() {
 		boolean newValue = !isShuffleOn;
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -132,6 +164,11 @@ public class MusicLoader {
 		close(); // to trigger a new query
 	}
 
+	/**
+	 * Jump to.
+	 *
+	 * @param song the song
+	 */
 	public void jumpTo(Song song) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		Editor editor = prefs.edit();
@@ -145,7 +182,10 @@ public class MusicLoader {
 		instance = null;
 	}
 
-    public void close() {
+	/**
+	 * Close.
+	 */
+	public void close() {
     	if (cur != null){
         	// Save current song in a Shared Preference
     		String title  = cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.TITLE));

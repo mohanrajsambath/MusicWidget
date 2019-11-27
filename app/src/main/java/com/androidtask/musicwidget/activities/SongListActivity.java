@@ -25,6 +25,9 @@ import com.androidtask.musicwidget.utilis.Constants;
 import com.androidtask.musicwidget.utilis.PermissionHelper.ActivityManagePermission;
 import com.androidtask.musicwidget.utilis.PermissionHelper.PermissionResult;
 
+/**
+ * The type Song list activity.
+ */
 public class SongListActivity extends ActivityManagePermission {
     private SongListAdapter adapter;
     private Context getActivityContext;
@@ -35,7 +38,7 @@ public class SongListActivity extends ActivityManagePermission {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
         getActivityContext = this;
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.title_activity_song_list));
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
@@ -74,7 +77,7 @@ public class SongListActivity extends ActivityManagePermission {
     }
 
     private void initView() {
-         list = (ListView) findViewById(R.id.listView);
+         list = findViewById(R.id.listView);
     }
 
 

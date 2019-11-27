@@ -13,6 +13,9 @@ import com.androidtask.musicwidget.MusicWidget;
 import com.androidtask.musicwidget.R;
 import com.androidtask.musicwidget.service.MusicService;
 
+/**
+ * The type Music notification.
+ */
 public class MusicNotification {
 	private final NotificationCompat.Builder builder;
 	private Notification notification;
@@ -20,6 +23,14 @@ public class MusicNotification {
 	private final NotificationManager manager;
 	private final int notificationID;
 
+	/**
+	 * Instantiates a new Music notification.
+	 *
+	 * @param context        the context
+	 * @param notificationID the notification id
+	 * @param title          the title
+	 * @param artist         the artist
+	 */
 	public MusicNotification(Context context, int notificationID, String title, String artist){
 		this.notificationID = notificationID;
 		manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -57,10 +68,22 @@ public class MusicNotification {
 	}
 
 
+	/**
+	 * Get notification notification.
+	 *
+	 * @return the notification
+	 */
 	public Notification getNotification(){
 		return notification;
 	}
 
+	/**
+	 * Update.
+	 *
+	 * @param title     the title
+	 * @param artist    the artist
+	 * @param isPlaying the is playing
+	 */
 	public void update(String title, String artist, boolean isPlaying){
 		builder.setContentTitle(title)
 				.setContentText(artist)

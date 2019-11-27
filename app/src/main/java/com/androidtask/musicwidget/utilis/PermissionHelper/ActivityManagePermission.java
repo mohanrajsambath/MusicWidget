@@ -17,12 +17,24 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The type Activity manage permission.
+ */
 public class ActivityManagePermission extends AppCompatActivity {
 
+    /**
+     * The constant REQUEST_PERMISSIONS.
+     */
     public static final int REQUEST_PERMISSIONS = 200;
 
+    /**
+     * The Permission result.
+     */
     PermissionResult permissionResult;
-    String permissionAsk[];
+    /**
+     * The Permission ask.
+     */
+    String[] permissionAsk;
 
 
     @Override
@@ -30,6 +42,13 @@ public class ActivityManagePermission extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Is permission granted boolean.
+     *
+     * @param context    the context
+     * @param permission the permission
+     * @return the boolean
+     */
     public boolean isPermissionGranted(@NonNull Context context, @NonNull String permission) {
         boolean granted = ((Build.VERSION.SDK_INT < Build.VERSION_CODES.M) || (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED));
         return granted;
@@ -37,7 +56,7 @@ public class ActivityManagePermission extends AppCompatActivity {
 
 
     private void internalRequestPermission(String[] permissionAsk) {
-        String arrayPermissionNotGranted[];
+        String[] arrayPermissionNotGranted;
         ArrayList<String> permissionsNotGranted = new ArrayList<>();
 
         for (int i = 0; i < permissionAsk.length; i++) {
@@ -56,7 +75,7 @@ public class ActivityManagePermission extends AppCompatActivity {
 
             arrayPermissionNotGranted = new String[permissionsNotGranted.size()];
             arrayPermissionNotGranted = permissionsNotGranted.toArray(arrayPermissionNotGranted);
-            ActivityCompat.requestPermissions( (Activity) this, arrayPermissionNotGranted, REQUEST_PERMISSIONS);
+            ActivityCompat.requestPermissions(this, arrayPermissionNotGranted, REQUEST_PERMISSIONS);
 
         }
 
@@ -102,17 +121,16 @@ public class ActivityManagePermission extends AppCompatActivity {
     }
 
 
-
-
     /**
+     * Ask compact permissions.
+     *
      * @param permissions      String[] permissions ask
      * @param permissionResult callback PermissionResult
      */
-    public void askCompactPermissions(String permissions[],  PermissionResult permissionResult) {
+    public void askCompactPermissions(String[] permissions, PermissionResult permissionResult) {
         permissionAsk = permissions;
         this.permissionResult = permissionResult;
         internalRequestPermission(permissionAsk);
-        //this.getActivityContext = getActivityContext;
     }
 
 }

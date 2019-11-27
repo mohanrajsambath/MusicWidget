@@ -5,6 +5,9 @@ import android.database.Cursor;
 import android.provider.MediaStore;
 import android.util.Log;
 
+/**
+ * The type Song list loader.
+ */
 public class SongListLoader {
 	private static final String TAG = "Music Loader";
 	private static final String SORT_BY = MediaStore.Audio.Media.ARTIST + ", " + MediaStore.Audio.Media.TITLE;
@@ -13,6 +16,12 @@ public class SongListLoader {
 	private Cursor cur;
 
 
+	/**
+	 * Get instance song list loader.
+	 *
+	 * @param context the context
+	 * @return the song list loader
+	 */
 	public static SongListLoader getInstance(Context context){
 		if (instance == null) {
 			instance = new SongListLoader(context);
@@ -26,7 +35,12 @@ public class SongListLoader {
     }
 
 
-    public Cursor getCursor() {
+	/**
+	 * Gets cursor.
+	 *
+	 * @return the cursor
+	 */
+	public Cursor getCursor() {
         Log.d(TAG, "Querying media...");
 
 
@@ -59,6 +73,12 @@ public class SongListLoader {
 		return cur;
     }
 
+	/**
+	 * Gets filtered cursor.
+	 *
+	 * @param constraint the constraint
+	 * @return the filtered cursor
+	 */
 	public Cursor getFilteredCursor(CharSequence constraint) {
 		Log.d(TAG, "Querying media for filter...");
 

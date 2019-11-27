@@ -22,7 +22,10 @@ import com.androidtask.musicwidget.musicplayer.MusicPlayerCompletionListener;
 import java.io.IOException;
 
 
-public class MusicService extends Service implements MusicPlayerCompletionListener 
+/**
+ * The type Music service.
+ */
+public class MusicService extends Service implements MusicPlayerCompletionListener
 {
 	private static final String TAG = "Music Service";
 	private static final int ONGOING_NOTIFICATION_ID = 1;

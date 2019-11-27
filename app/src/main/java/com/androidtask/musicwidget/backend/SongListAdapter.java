@@ -16,9 +16,18 @@ import com.androidtask.musicwidget.model.Song;
 import com.androidtask.musicwidget.R;
 import com.androidtask.musicwidget.model.Song;
 
+/**
+ * The type Song list adapter.
+ */
 public class SongListAdapter extends CursorAdapter implements SectionIndexer{
     private final AlphabetIndexer mAlphabetIndexer;
 
+    /**
+     * Instantiates a new Song list adapter.
+     *
+     * @param context the context
+     * @param c       the c
+     */
     public SongListAdapter(Activity context, Cursor c) {
         super(context, c, false);
 
@@ -35,9 +44,9 @@ public class SongListAdapter extends CursorAdapter implements SectionIndexer{
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        TextView tvArtist   = (TextView) view.findViewById(R.id.textArtist);
-        TextView tvTitle    = (TextView) view.findViewById(R.id.textTitle);
-        TextView tvDuration = (TextView) view.findViewById(R.id.textDuration);
+        TextView tvArtist   = view.findViewById(R.id.textArtist);
+        TextView tvTitle    = view.findViewById(R.id.textTitle);
+        TextView tvDuration = view.findViewById(R.id.textDuration);
 
         String artist   = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
         String title    = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
@@ -50,6 +59,12 @@ public class SongListAdapter extends CursorAdapter implements SectionIndexer{
         tvDuration.setText(song.getDurationStr());
     }
 
+    /**
+     * Gets song.
+     *
+     * @param position the position
+     * @return the song
+     */
     public Song getSong(int position) {
         Cursor cursor = (Cursor) getItem(position);
         String artist   = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
